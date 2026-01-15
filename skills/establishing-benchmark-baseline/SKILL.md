@@ -71,6 +71,13 @@ Baseline Progress:
 5. [generating-performance-reports]  → Document findings
 ```
 
+## Common Mistakes to Avoid
+
+- **Skipping this skill** - Always establish baselines before optimization
+- **Choosing inappropriate benchmarks** - Select benchmarks relevant to your language's strengths
+- **Not verifying correctness** - Ensure benchmark outputs are correct to avoid misleading results
+- **Small sample size** - Use sufficient iterations for reliable timing data (e.g., N=500 or more)
+
 ## Detailed Documentation
 
 See [WORKFLOW.md](WORKFLOW.md) for detailed phase instructions.
