@@ -7,10 +7,10 @@ Detailed instructions for generating BGV files with Graal compiler graph dumps.
 ### Level 1: Basic Graphs (Recommended Start)
 
 ```bash
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-  -Djdk.graal.PrintGraph=File \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> <program>
+<launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+  --vm.Djdk.graal.PrintGraph=File \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  <program>
 ```
 
 - Dumps: After parsing, After TruffleTier
@@ -19,10 +19,10 @@ EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
 ### Level 2: Detailed Phases
 
 ```bash
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:2 \
-  -Djdk.graal.MethodFilter='*hotFunction*' \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> <program>
+<launcher> --vm.Djdk.graal.Dump=Truffle:2 \
+  --vm.Djdk.graal.MethodFilter='*hotFunction*' \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  <program>
 ```
 
 - Shows all optimization phases
@@ -34,10 +34,10 @@ EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:2 \
 ### Filter by Method (Highly Recommended)
 
 ```bash
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-  -Djdk.graal.MethodFilter='*hotFunction*' \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> --engine.CompileOnly='*hotFunction*' <program>
+<launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+  --vm.Djdk.graal.MethodFilter='*hotFunction*' \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  --engine.CompileOnly='*hotFunction*' <program>
 ```
 
 - `--engine.CompileOnly` ensures only this function is compiled
@@ -47,10 +47,10 @@ EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
 ### With Source Positions
 
 ```bash
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-  -Djdk.graal.TrackNodeSourcePosition=true \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> --engine.NodeSourcePositions <program>
+<launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+  --vm.Djdk.graal.TrackNodeSourcePosition=true \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  --engine.NodeSourcePositions <program>
 ```
 
 - Enables source location tracking
@@ -92,9 +92,9 @@ rm -rf compiler_graphs/
 ## Combined with Tracing
 
 ```bash
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> --experimental-options \
+<launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  --experimental-options \
   --compiler.TracePerformanceWarnings=all \
   --engine.TraceCompilation \
   <program> 2>&1 | tee combined.log
@@ -114,10 +114,10 @@ EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
 
 3. **Dump graphs for hot function only**
    ```bash
-   EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-     -Djdk.graal.MethodFilter='*hotFunction*' \
-     -Djdk.graal.DumpPath=compiler_graphs" \
-     <launcher> --engine.CompileOnly='*hotFunction*' <program>
+   <launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+     --vm.Djdk.graal.MethodFilter='*hotFunction*' \
+     --vm.Djdk.graal.DumpPath=compiler_graphs \
+     --engine.CompileOnly='*hotFunction*' <program>
    ```
 
 4. **Convert to JSON**

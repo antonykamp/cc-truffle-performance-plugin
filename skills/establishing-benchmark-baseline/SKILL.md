@@ -1,6 +1,6 @@
 ---
 name: establishing-benchmark-baseline
-description: Establishes performance baselines by analyzing language characteristics, querying Computer Language Benchmarks Game and AreWeFastYet for comparable languages, creating local benchmark implementations, and generating a comprehensive baseline report. Use before performance optimization to set realistic expectations. Use when starting performance work, need benchmarks, want to compare against other languages, or establish expected performance ranges. (project)
+description: Establishes performance baselines by analyzing language characteristics, querying Computer Language Benchmarks Game and AreWeFastYet for comparable languages, creating local benchmark implementations, and generating a comprehensive baseline report. Use before performance optimization to set realistic expectations. Use when starting performance work, need benchmarks, want to compare against other languages, or establish expected performance ranges.
 ---
 
 # Establishing Benchmark Baseline

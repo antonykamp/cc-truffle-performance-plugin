@@ -1,6 +1,6 @@
 ---
 name: tracing-inlining-decisions
-description: Shows inlining decisions during compilation with call tree and reasons for inline/don't-inline. Use to verify critical calls are inlined, understand why inlining failed (too large, recursive, boundary), and optimize method sizes. Good inlining = better compilation. Recursive functions show 'not inlined' - expected behavior for Bytecode DSL limitation. (project)
+description: Shows inlining decisions during compilation with call tree and reasons for inline/don't-inline. Use to verify critical calls are inlined, understand why inlining failed (too large, recursive, boundary), and optimize method sizes. Good inlining = better compilation. Recursive functions show 'not inlined' - expected behavior for Bytecode DSL limitation.
 ---
 
 # Tracing Inlining Decisions

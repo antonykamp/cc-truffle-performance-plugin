@@ -1,6 +1,6 @@
 ---
 name: tracing-execution-counts
-description: Counts exact execution frequencies (not time) at function/statement level. Shows interpreted vs compiled execution split. Use to verify functions compile (>95% compiled), understand control flow patterns, and validate algorithmic complexity. Complements profiling-with-cpu-sampler by showing frequency rather than duration. (project)
+description: Counts exact execution frequencies (not time) at function/statement level. Shows interpreted vs compiled execution split. Use to verify functions compile (>95% compiled), understand control flow patterns, and validate algorithmic complexity. Complements profiling-with-cpu-sampler by showing frequency rather than duration.
 ---
 
 # Tracing Execution Counts

@@ -1,6 +1,6 @@
 ---
 name: generating-performance-theories
-description: Analyzes Truffle language implementations to generate testable performance theories. Loads benchmark baselines, performs systematic code analysis, and produces prioritized hypotheses with verification plans. Use after establishing baseline to identify potential performance issues before profiling. Use when analyzing why code is slow, finding optimization opportunities, or planning performance investigation. (project)
+description: Analyzes Truffle language implementations to generate testable performance theories. Loads benchmark baselines, performs systematic code analysis, and produces prioritized hypotheses with verification plans. Use after establishing baseline to identify potential performance issues before profiling. Use when analyzing why code is slow, finding optimization opportunities, or planning performance investigation.
 ---
 
 # Generating Performance Theories

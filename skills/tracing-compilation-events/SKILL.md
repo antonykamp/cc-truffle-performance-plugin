@@ -1,6 +1,6 @@
 ---
 name: tracing-compilation-events
-description: Logs every compilation event with timing, tier (T1/T2), success/failure, and invalidation reasons. Use to verify hot code is compiling, diagnose compilation failures/bailouts, track recompilation cycles, and understand tiered compilation behavior. Shows WHEN compilation happens. Combine with detecting-performance-warnings to understand WHY compilation fails. (project)
+description: Logs every compilation event with timing, tier (T1/T2), success/failure, and invalidation reasons. Use to verify hot code is compiling, diagnose compilation failures/bailouts, track recompilation cycles, and understand tiered compilation behavior. Shows WHEN compilation happens. Combine with detecting-performance-warnings to understand WHY compilation fails.
 ---
 
 # Tracing Compilation Events

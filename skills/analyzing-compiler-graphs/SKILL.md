@@ -1,6 +1,6 @@
 ---
 name: analyzing-compiler-graphs
-description: Dumps and analyzes Graal IR compiler graphs showing optimization decisions. Use BGV format with bgv2json/seafoam to inspect escape analysis, boxing removal, inlining decisions, and call node types. Reveals what compiler actually optimized vs intended. Use as last resort after basic profiling when root cause remains unclear. (project)
+description: Dumps and analyzes Graal IR compiler graphs showing optimization decisions. Use BGV format with bgv2json/seafoam to inspect escape analysis, boxing removal, inlining decisions, and call node types. Reveals what compiler actually optimized vs intended. Use as last resort after basic profiling when root cause remains unclear.
 ---
 
 # Analyzing Compiler Graphs
@@ -27,16 +27,17 @@ Deep-dive tool for understanding Graal compiler optimization decisions at the IR
 
 ```bash
 # Basic dump for Truffle compilations
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-  -Djdk.graal.PrintGraph=File \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> <program>
+<launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+  --vm.Djdk.graal.PrintGraph=File \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  <program>
 
 # Focused dump for specific method (recommended)
-EXTRA_JAVA_ARGS="-Djdk.graal.Dump=Truffle:1 \
-  -Djdk.graal.MethodFilter='*hotFunction*' \
-  -Djdk.graal.DumpPath=compiler_graphs" \
-  <launcher> --engine.CompileOnly='*hotFunction*' <program>
+<launcher> --vm.Djdk.graal.Dump=Truffle:1 \
+  --vm.Djdk.graal.MethodFilter='*hotFunction*' \
+  --vm.Djdk.graal.DumpPath=compiler_graphs \
+  --engine.CompileOnly='*hotFunction*' \
+  <program>
 ```
 
 ### 2. Analyze with Seafoam
@@ -73,7 +74,7 @@ See [QUERIES.md](QUERIES.md) for jq analysis queries.
 - [ ] List BGV files: `ls -lh compiler_graphs/*.bgv`
 
 **After analyzing graphs**:
-- [ ] Validate: Node counts reasonable (thousands, not millions)? YES / NO
+- [ ] Validate: Node counts reasonable? YES / NO
 - [ ] If NO: **STOP** - May have wrong phase or too broad filter
 - [ ] Save analysis: `tool-outputs/compiler-graph-analysis-[function].txt`
 

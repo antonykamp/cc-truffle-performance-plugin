@@ -1,6 +1,6 @@
 ---
 name: verifying-performance-theories
-description: Coordinates verification of performance theories using profiling tools. Enforces Fermi verification protocol, runs appropriate tool skills, and synthesizes evidence from multiple sources. Use after generating theories to prove which issues actually matter. Use when validating hypotheses, running profiling tools systematically, or collecting quantitative evidence. (project)
+description: Coordinates verification of performance theories using profiling tools. Enforces Fermi verification protocol, runs appropriate tool skills, and synthesizes evidence from multiple sources. Use after generating theories to prove which issues actually matter. Use when validating hypotheses, running profiling tools systematically, or collecting quantitative evidence.
 ---
 
 # Verifying Performance Theories

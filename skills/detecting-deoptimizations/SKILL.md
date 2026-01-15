@@ -1,6 +1,6 @@
 ---
 name: detecting-deoptimizations
-description: Traces deoptimization events where execution falls back from compiled code to interpreter. Use to detect deoptimization loops, unstable assumptions, and type instability. Zero transfers in steady-state is the goal. Many transfers indicate severe performance problems. Critical for diagnosing compilation instability. (project)
+description: Traces deoptimization events where execution falls back from compiled code to interpreter. Use to detect deoptimization loops, unstable assumptions, and type instability. Zero transfers in steady-state is the goal. Many transfers indicate severe performance problems. Critical for diagnosing compilation instability.
 ---
 
 # Detecting Deoptimizations

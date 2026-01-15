@@ -1,6 +1,6 @@
 ---
 name: generating-performance-reports
-description: Compiles verified performance findings into structured analysis reports. Creates prioritized issue lists with quantitative evidence from profiling tools. Use after theories have been verified to produce final documentation. Use when creating performance report, documenting findings, or summarizing optimization opportunities. (project)
+description: Compiles verified performance findings into structured analysis reports. Creates prioritized issue lists with quantitative evidence from profiling tools. Use after theories have been verified to produce final documentation. Use when creating performance report, documenting findings, or summarizing optimization opportunities.
 ---
 
 # Generating Performance Reports

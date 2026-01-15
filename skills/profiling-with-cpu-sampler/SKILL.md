@@ -1,6 +1,6 @@
 ---
 name: profiling-with-cpu-sampler
-description: Time-based sampling profiler showing WHERE execution time is spent (wall-clock time, not frequency). Provides histogram with self/total time, compilation tiers (T0/T1/T2), and flame graphs. Use as FIRST step to identify hot functions consuming most time. Low overhead, suitable for longer runs. Pair with tracing-execution-counts to understand time-per-execution vs execution frequency. (project)
+description: Time-based sampling profiler showing WHERE execution time is spent (wall-clock time, not frequency). Provides histogram with self/total time, compilation tiers (T0/T1/T2), and flame graphs. Use as FIRST step to identify hot functions consuming most time. Low overhead, suitable for longer runs. Pair with tracing-execution-counts to understand time-per-execution vs execution frequency.
 ---
 
 # Profiling with CPU Sampler

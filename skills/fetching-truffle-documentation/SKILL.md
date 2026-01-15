@@ -1,6 +1,6 @@
 ---
 name: fetching-truffle-documentation
-description: Fetches information from official GraalVM, Truffle, and Graal compiler documentation for API guidance, performance optimization, compiler flags, profiling, specializations, Bytecode DSL, Truffle DSL, partial evaluation, and compilation analysis. Use when you need authoritative documentation about Truffle framework, GraalVM compiler options, or optimization techniques. Use when asking about Truffle API, compiler flags, specialization patterns, or Graal options. (project)
+description: Fetches information from official GraalVM, Truffle, and Graal compiler documentation for API guidance, performance optimization, compiler flags, profiling, specializations, Bytecode DSL, Truffle DSL, partial evaluation, and compilation analysis. Use when you need authoritative documentation about Truffle framework, GraalVM compiler options, or optimization techniques. Use when asking about Truffle API, compiler flags, specialization patterns, or Graal options.
 ---
 
 # Fetching Truffle Documentation
@@ -54,10 +54,3 @@ Search documentation when you need:
 - API usage for Truffle DSL or Bytecode DSL
 - Performance optimization strategies
 - Understanding of compiler warnings or deoptimization causes
-
-## Complementary Skills
-
-Use with performance analysis skills:
-- **detecting-performance-warnings** - Interpret compilation warnings
-- **analyzing-compiler-graphs** - Understand graph optimizations
-- **profiling-with-cpu-sampler** - Learn profiler output interpretation

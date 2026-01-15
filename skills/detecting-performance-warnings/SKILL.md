@@ -1,6 +1,6 @@
 ---
 name: detecting-performance-warnings
-description: Detects optimization barriers during Truffle compilation. Identifies virtual calls, non-constant stores, unresolved type checks, and TruffleBoundary issues that prevent peak performance. Reports exact source locations with stack traces. Use as essential step for eliminating compilation warnings. ONLY works with traditional Truffle DSL nodes (NOT Bytecode DSL). (project)
+description: Detects optimization barriers during Truffle compilation. Identifies virtual calls, non-constant stores, unresolved type checks, and TruffleBoundary issues that prevent peak performance. Reports exact source locations with stack traces. Use as essential step for eliminating compilation warnings. ONLY works with traditional Truffle DSL nodes (NOT Bytecode DSL).
 ---
 
 # Detecting Performance Warnings
