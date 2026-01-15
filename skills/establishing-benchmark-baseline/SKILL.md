@@ -11,6 +11,8 @@ Establishes performance baselines for your language implementation through autom
 
 ## Quick Start
 
+**Step 0**: Check if `BENCHMARK_BASELINE.md` already exists in the workspace. If it does, skip this skill and continue with the recommended workflow (e.g., `generating-performance-theories`).
+
 **Step 1**: Ask user which benchmarks to generate using AskUserQuestion tool:
 - Benchmarks Game only
 - AreWeFastYet only

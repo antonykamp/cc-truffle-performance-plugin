@@ -23,6 +23,10 @@ Systematically analyzes language implementation code to generate testable perfor
 
 ## Quick Start
 
+**Step 0**: Check if a theories file (e.g., `PERFORMANCE_THEORIES.md`) already exists in the workspace:
+- If it exists with **unverified theories**, skip this skill and continue with `verifying-performance-theories`
+- If it exists but **all theories are validated and fixed**, delete it and run this skill again to generate new theories for the next optimization iteration
+
 **Step 1**: Ask user for analysis focus using AskUserQuestion:
 - All issues (comprehensive)
 - Critical & high-impact only

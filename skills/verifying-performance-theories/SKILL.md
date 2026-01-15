@@ -15,7 +15,7 @@ Systematically verifies performance theories using profiling tools. Enforces rig
 
 **Input**: List of theories from `generating-performance-theories` skill
 
-**Approach**: Verify one theory at a time, highest-severity first. Fix it, re-profile, continue.
+**Approach**: Verify one theory at a time, highest-severity first. If the most critical theory is already verified and fixed, or has been falsified, skip it and continue with the next critical theory. Fix verified issues, re-profile, continue.
 
 **Output**: Verified findings for `generating-performance-reports`
 
