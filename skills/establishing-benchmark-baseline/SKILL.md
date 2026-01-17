@@ -65,12 +65,12 @@ Baseline Progress:
 - `analyzing-compiler-graphs` - Deep-dive compiler optimization
 
 **Workflow**:
-```
-1. [establishing-benchmark-baseline] → Establish expectations
-2. [Run benchmarks]                  → Get actual results
-3. [generating-performance-theories] → Generate theories
-4. [verifying-performance-theories]  → Verify with tools
-5. [generating-performance-reports]  → Document findings
+```text
+1. [establishing-benchmark-baseline] → THIS SKILL
+2. [generating-performance-theories] → Generate theories
+3. [verifying-performance-theories]  → Verify with tools
+4. [implementing-performance-fixes]  → Implement and validate fix
+5. Loop to step 2 if performance gaps remain
 ```
 
 ## Common Mistakes to Avoid

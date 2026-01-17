@@ -19,7 +19,7 @@ Systematic verification of performance theories using profiling tools.
 2. Select the highest-severity unverified theory
 3. Note the theory's verification plan (which tools are needed)
 
-If all theories are verified or falsified, proceed to report generation.
+If one theory is verified, proceed to `implementing-performance-fixes` for the verified theory.
 
 ## Phase 2: Prepare for Verification
 
@@ -107,10 +107,9 @@ For verified theories, characterize:
 
 ### If VERIFIED
 
-1. Present fix recommendation to user
-2. **Stop investigation** - multiple issues create noise in profiling
-3. Wait for user to apply fix
-4. After fix → re-profile → continue with next theory
+1. Update theory status to `verified` in PERFORMANCE_THEORIES.md
+2. **Stop verification** - proceed to `implementing-performance-fixes` skill
+3. The fix skill will handle implementation, validation, and iteration
 
 ### If FALSIFIED
 
@@ -174,4 +173,4 @@ Question when:
 - `profiling-memory-allocations` - allocation patterns
 - `analyzing-compiler-graphs` - deep IR analysis
 
-**Output**: Verified findings ready for `generating-performance-reports`
+**Output**: Verified theories ready for `implementing-performance-fixes`

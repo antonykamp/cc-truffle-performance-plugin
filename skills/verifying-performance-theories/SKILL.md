@@ -57,7 +57,7 @@ See [WORKFLOW.md](WORKFLOW.md) for detailed procedures.
 
 **Predecessor**: `generating-performance-theories` → Provides theories to verify
 
-**Successor**: `generating-performance-reports` → Compiles verified findings
+**Successor**: `implementing-performance-fixes` → Implements and validates fixes for verified theories
 
 **Tool Skills Used**:
 - `profiling-with-cpu-sampler`
@@ -71,10 +71,10 @@ See [WORKFLOW.md](WORKFLOW.md) for detailed procedures.
 
 ## Workflow Position
 
-```
+```text
 1. [establishing-benchmark-baseline] → Create baseline
-2. [Run benchmarks]                  → Get timing data
-3. [generating-performance-theories] → Generate theories
-4. [verifying-performance-theories]  → THIS SKILL
-5. [generating-performance-reports]  → Document findings
+2. [generating-performance-theories] → Generate theories
+3. [verifying-performance-theories]  → THIS SKILL
+4. [implementing-performance-fixes]  → Implement and validate fix
+5. Loop to step 2 if performance gaps remain
 ```

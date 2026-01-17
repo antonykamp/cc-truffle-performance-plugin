@@ -61,8 +61,8 @@ cc-truffle-performance-plugin/
     ├── detecting-performance-warnings/
     ├── establishing-benchmark-baseline/
     ├── fetching-truffle-documentation/
-    ├── generating-performance-reports/
     ├── generating-performance-theories/
+    ├── implementing-performance-fixes/
     ├── profiling-memory-allocations/
     ├── profiling-with-cpu-sampler/
     ├── tracing-compilation-events/

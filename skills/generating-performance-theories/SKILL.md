@@ -174,7 +174,7 @@ Benchmark: [Benchmark name]
 
 **Successor Skills**:
 - `verifying-performance-theories` → Verifies theories with profiling tools
-- `generating-performance-reports` → Compiles verified findings into report
+- `implementing-performance-fixes` → Implements and validates fixes for verified theories
 
 **Tool Skills Referenced**:
 - `profiling-with-cpu-sampler` - Time-based profiling
@@ -188,12 +188,12 @@ Benchmark: [Benchmark name]
 
 ## Workflow
 
-```
+```text
 1. [establishing-benchmark-baseline] → Create baseline
-2. [Run benchmarks]                  → Get timing data
-3. [generating-performance-theories] → THIS SKILL
-4. [verifying-performance-theories]  → Verify with tools
-5. [generating-performance-reports]  → Document findings
+2. [generating-performance-theories] → THIS SKILL
+3. [verifying-performance-theories]  → Verify with tools
+4. [implementing-performance-fixes]  → Implement and validate fix
+5. Loop to step 2 if performance gaps remain
 ```
 
 See [WORKFLOW.md](WORKFLOW.md) for detailed analysis procedures.
