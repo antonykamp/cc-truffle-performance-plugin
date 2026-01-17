@@ -1,6 +1,6 @@
 ---
 name: generating-performance-theories
-description: "[PHASE 2] Analyzes code to identify optimization opportunities. Performs systematic analysis of operations, configurations, and architecture to generate prioritized theories. Requires: BENCHMARK_BASELINE.md. Outputs: PERFORMANCE_THEORIES.md. Use after baseline is established."
+description: "[PHASE 2] Analyzes code to identify optimization opportunities. Entry: BENCHMARK_BASELINE.md exists AND (no PERFORMANCE_THEORIES.md OR all theories fixed). Outputs: PERFORMANCE_THEORIES.md. Next: PHASE 3 (verifying-performance-theories)."
 ---
 
 # Generating Performance Theories

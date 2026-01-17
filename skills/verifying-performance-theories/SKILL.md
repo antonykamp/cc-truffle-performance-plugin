@@ -1,6 +1,6 @@
 ---
 name: verifying-performance-theories
-description: "[PHASE 3] Proves theories with profiling tools. Runs CPU sampler, traces compilation, detects deoptimizations to collect quantitative evidence. Requires: PERFORMANCE_THEORIES.md with unverified theories. Outputs: Updated theories with verified/falsified status. Use after theories are generated."
+description: "[PHASE 3] Proves theories with profiling tools. Entry: PERFORMANCE_THEORIES.md has unverified theories. Outputs: Theory marked verified/falsified. Next: PHASE 4 (implementing-performance-fixes) when one theory is verified."
 ---
 
 # Verifying Performance Theories

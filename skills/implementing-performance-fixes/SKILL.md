@@ -1,6 +1,6 @@
 ---
 name: implementing-performance-fixes
-description: "[PHASE 4] Implements and validates fixes for verified theories. Designs fix, runs 3 relevant benchmarks to validate, updates tracking files. Requires: PERFORMANCE_THEORIES.md with verified theory. Outputs: Code fix, updated BENCHMARK_BASELINE.md column, theory marked fixed/fix-failed. Use after a theory is verified."
+description: "[PHASE 4] Implements and validates fixes for verified theories. Entry: PERFORMANCE_THEORIES.md has a verified theory. Outputs: Code fix, BENCHMARK_BASELINE.md new column, theory marked fixed/fix-failed. Next: Loop to PHASE 2 if performance gaps remain, otherwise done."
 ---
 
 # Implementing Performance Fixes

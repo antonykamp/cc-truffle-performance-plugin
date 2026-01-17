@@ -1,6 +1,6 @@
 ---
 name: establishing-benchmark-baseline
-description: "[PHASE 1] Creates benchmark suite and performance expectations. Fetches benchmarks from Benchmarks Game and AreWeFastYet, implements them locally, measures baseline performance. Requires: Language implementation. Outputs: BENCHMARK_BASELINE.md, benchmark files. Use first before any optimization work."
+description: "[PHASE 1] Creates benchmark suite and performance expectations. Entry: No BENCHMARK_BASELINE.md exists. Outputs: BENCHMARK_BASELINE.md, benchmark files. Next: PHASE 2 (generating-performance-theories)."
 ---
 
 # Establishing Benchmark Baseline
