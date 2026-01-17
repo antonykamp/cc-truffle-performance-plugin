@@ -1,6 +1,6 @@
 ---
 name: implementing-performance-fixes
-description: Implements fixes for verified performance theories in Truffle language implementations. Analyzes verified issues, designs fixes (including architectural changes when cost-benefit fits), validates improvements with benchmarks, and updates tracking files. Use after verifying a theory to apply and validate the fix. Use when fixing performance issues, implementing optimizations, or validating that changes improve performance.
+description: "[PHASE 4] Implements and validates fixes for verified theories. Designs fix, runs 3 relevant benchmarks to validate, updates tracking files. Requires: PERFORMANCE_THEORIES.md with verified theory. Outputs: Code fix, updated BENCHMARK_BASELINE.md column, theory marked fixed/fix-failed. Use after a theory is verified."
 ---
 
 # Implementing Performance Fixes
@@ -99,10 +99,10 @@ Or if fix failed:
 ## Workflow Position
 
 ```text
-1. [establishing-benchmark-baseline] → Create baseline
-2. [generating-performance-theories] → Generate theories
-3. [verifying-performance-theories]  → Verify with tools
-4. [implementing-performance-fixes]  → THIS SKILL
+1. [establishing-benchmark-baseline] → Create baseline (PHASE 1)
+2. [generating-performance-theories] → Generate theories (PHASE 2)
+3. [verifying-performance-theories]  → Verify with tools (PHASE 3)
+4. [implementing-performance-fixes]  → THIS SKILL (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```
 

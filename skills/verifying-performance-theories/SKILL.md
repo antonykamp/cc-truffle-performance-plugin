@@ -1,6 +1,6 @@
 ---
 name: verifying-performance-theories
-description: Coordinates verification of performance theories using profiling tools. Enforces Fermi verification protocol, runs appropriate tool skills, and synthesizes evidence from multiple sources. Use after generating theories to prove which issues actually matter. Use when validating hypotheses, running profiling tools systematically, or collecting quantitative evidence.
+description: "[PHASE 3] Proves theories with profiling tools. Runs CPU sampler, traces compilation, detects deoptimizations to collect quantitative evidence. Requires: PERFORMANCE_THEORIES.md with unverified theories. Outputs: Updated theories with verified/falsified status. Use after theories are generated."
 ---
 
 # Verifying Performance Theories
@@ -72,9 +72,9 @@ See [WORKFLOW.md](WORKFLOW.md) for detailed procedures.
 ## Workflow Position
 
 ```text
-1. [establishing-benchmark-baseline] → Create baseline
-2. [generating-performance-theories] → Generate theories
-3. [verifying-performance-theories]  → THIS SKILL
-4. [implementing-performance-fixes]  → Implement and validate fix
+1. [establishing-benchmark-baseline] → Create baseline (PHASE 1)
+2. [generating-performance-theories] → Generate theories (PHASE 2)
+3. [verifying-performance-theories]  → THIS SKILL (PHASE 3)
+4. [implementing-performance-fixes]  → Implement and validate fix (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```

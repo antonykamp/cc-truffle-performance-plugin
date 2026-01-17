@@ -1,6 +1,6 @@
 ---
 name: establishing-benchmark-baseline
-description: Establishes performance baselines by analyzing language characteristics, querying Computer Language Benchmarks Game and AreWeFastYet for comparable languages, creating local benchmark implementations, and generating a comprehensive baseline report. Use before performance optimization to set realistic expectations. Use when starting performance work, need benchmarks, want to compare against other languages, or establish expected performance ranges.
+description: "[PHASE 1] Creates benchmark suite and performance expectations. Fetches benchmarks from Benchmarks Game and AreWeFastYet, implements them locally, measures baseline performance. Requires: Language implementation. Outputs: BENCHMARK_BASELINE.md, benchmark files. Use first before any optimization work."
 ---
 
 # Establishing Benchmark Baseline
@@ -11,7 +11,7 @@ Establishes performance baselines for your language implementation through autom
 
 ## Quick Start
 
-**Step 0**: Check if `BENCHMARK_BASELINE.md` already exists in the workspace. If it does, skip this skill and continue with the recommended workflow (e.g., `generating-performance-theories`).
+**Step 0**: Check if `BENCHMARK_BASELINE.md` already exists in the workspace. If it does, skip this workflow and continue with `generating-performance-theories`.
 
 **Step 1**: Ask user which benchmarks to generate using AskUserQuestion tool:
 - Benchmarks Game only
@@ -65,11 +65,12 @@ Baseline Progress:
 - `analyzing-compiler-graphs` - Deep-dive compiler optimization
 
 **Workflow**:
+
 ```text
-1. [establishing-benchmark-baseline] → THIS SKILL
-2. [generating-performance-theories] → Generate theories
-3. [verifying-performance-theories]  → Verify with tools
-4. [implementing-performance-fixes]  → Implement and validate fix
+1. [establishing-benchmark-baseline] → THIS SKILL (PHASE 1)
+2. [generating-performance-theories] → Generate theories (PHASE 2)
+3. [verifying-performance-theories]  → Verify with tools (PHASE 3)
+4. [implementing-performance-fixes]  → Implement and validate fix (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```
 

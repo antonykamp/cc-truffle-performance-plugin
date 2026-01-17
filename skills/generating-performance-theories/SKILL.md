@@ -1,6 +1,6 @@
 ---
 name: generating-performance-theories
-description: Analyzes Truffle language implementations to generate testable performance theories. Loads benchmark baselines, performs systematic code analysis, and produces prioritized hypotheses with verification plans. Use after establishing baseline to identify potential performance issues before profiling. Use when analyzing why code is slow, finding optimization opportunities, or planning performance investigation.
+description: "[PHASE 2] Analyzes code to identify optimization opportunities. Performs systematic analysis of operations, configurations, and architecture to generate prioritized theories. Requires: BENCHMARK_BASELINE.md. Outputs: PERFORMANCE_THEORIES.md. Use after baseline is established."
 ---
 
 # Generating Performance Theories
@@ -24,7 +24,7 @@ Systematically analyzes language implementation code to generate testable perfor
 ## Quick Start
 
 **Step 0**: Check if a theories file (e.g., `PERFORMANCE_THEORIES.md`) already exists in the workspace:
-- If it exists with **unverified theories**, skip this skill and continue with `verifying-performance-theories`
+- If it exists with **unverified theories**, skip this workflow and continue with `verifying-performance-theories`
 - If it exists but **all theories are validated and fixed**, delete it and run this skill again to generate new theories for the next optimization iteration
 
 **Step 1**: Ask user for analysis focus using AskUserQuestion:
@@ -189,10 +189,10 @@ Benchmark: [Benchmark name]
 ## Workflow
 
 ```text
-1. [establishing-benchmark-baseline] → Create baseline
-2. [generating-performance-theories] → THIS SKILL
-3. [verifying-performance-theories]  → Verify with tools
-4. [implementing-performance-fixes]  → Implement and validate fix
+1. [establishing-benchmark-baseline] → Create baseline (PHASE 1)
+2. [generating-performance-theories] → THIS SKILL (PHASE 2)
+3. [verifying-performance-theories]  → Verify with tools (PHASE 3)
+4. [implementing-performance-fixes]  → Implement and validate fix (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```
 
