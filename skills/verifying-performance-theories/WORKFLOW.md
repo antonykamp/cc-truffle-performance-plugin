@@ -55,6 +55,18 @@ Run the tools specified in the theory's verification plan. For each tool:
 
 Save outputs to `tool-outputs/` for later reference.
 
+### Direct Implementation as Verification (for small fixes)
+
+If the proposed fix is small (<10 lines of code), you can verify the theory empirically:
+
+1. Implement the fix
+2. Build the project
+3. Run the benchmark and compare against baseline
+4. Significant improvement → theory VERIFIED
+5. No improvement → theory FALSIFIED or requires further investigation
+
+This approach provides direct empirical evidence and is often faster than extensive profiling for simple changes.
+
 ### Handling Unexpected Results
 
 If tool output doesn't match expectations:

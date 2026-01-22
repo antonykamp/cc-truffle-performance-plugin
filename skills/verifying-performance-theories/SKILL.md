@@ -23,7 +23,7 @@ Systematically verifies performance theories using profiling tools. Enforces rig
 
 1. **Select** highest-priority unverified theory
 2. **Prepare** - load tool docs, form expectations (Fermi estimation)
-3. **Execute** tools from the theory's verification plan
+3. **Execute** verification - use profiling tools OR direct implementation (if fix is <10 lines)
 4. **Handle emergent issues** - pivot if more critical, note as future work if not
 5. **Synthesize** evidence → VERIFIED / FALSIFIED / INCONCLUSIVE
 6. **Next steps** - if verified, recommend fix and stop; otherwise continue
@@ -50,6 +50,7 @@ See [WORKFLOW.md](WORKFLOW.md) for detailed procedures.
 - ❌ **Substituting code analysis for tool verification** - Code shows potential, tools prove actuality
 - ❌ **Running only one tool** - Multiple tools required for confidence
 - ❌ **Skipping Fermi verification** - Silent tool failures produce garbage data
+- ❌ **Over-profiling simple fixes** - If the fix is small (<10 lines), implement and benchmark instead of extensive profiling
 - ❌ **Ignoring emergent issues** - If tools reveal a critical issue (like deopt loops), evaluate whether to pivot
 - ❌ **Always pivoting** - Only pivot if the new issue is MORE critical than the current theory
 
