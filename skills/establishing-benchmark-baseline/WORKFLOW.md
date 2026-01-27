@@ -338,6 +338,7 @@ Primary Comparisons:
        - sieve: 10000
        - storage: 100
        - towers: 100
+       - else: 100 (default)
    - Record timestamp of measurement
    - Example command: `<language-launcher> <harness> <benchmark> <iterations> <inner-iterations>`
    - Parse output to extract timing data
