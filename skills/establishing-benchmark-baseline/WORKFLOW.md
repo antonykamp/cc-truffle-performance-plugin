@@ -327,7 +327,17 @@ Primary Comparisons:
    - **REQUIRED**: Run benchmark with appropriate iterations to measure performance
    - Use project's benchmark harness/framework for timing
    - Capture execution time (total runtime, average per iteration)
-   - Run 10 outer iterations for each benchmark, use the outer iteration specified in [EXAMPLES.md](EXAMPLES.md)!
+   - Run 10 outer iterations for each benchmark
+   - **Important** Run inner iterations as specified by AreWeFastYet guidelines:
+       - bounce: 100
+       - list: 100
+       - mandelbrot: 100
+       - nbody: 100
+       - permute: 10000
+       - queens: 3000
+       - sieve: 10000
+       - storage: 100
+       - towers: 100
    - Record timestamp of measurement
    - Example command: `<language-launcher> <harness> <benchmark> <iterations> <inner-iterations>`
    - Parse output to extract timing data
