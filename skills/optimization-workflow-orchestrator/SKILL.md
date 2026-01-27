@@ -60,12 +60,12 @@ After all theories are processed (fixed/fix-failed/falsified), evaluate:
 
 **Continue optimization (loop to PHASE 2)** if:
 
-- Performance still below baseline expectations (check BENCHMARK_BASELINE.md)
 - User requests more optimization
-- Significant performance gaps remain (>20% slower than expected)
 
 **Stop optimization** if:
 
+- One optimization iteration completed
+- User didn't request more optimization
 - Performance meets or exceeds baseline expectations
 - User indicates satisfaction
 - No more theories can be generated (diminishing returns)
@@ -80,34 +80,23 @@ After all theories are processed (fixed/fix-failed/falsified), evaluate:
 
 ## Workflow Visualization
 
-```text
-                    ┌──────────────────────────────────────┐
-                    │                                      │
-                    ▼                                      │
-┌─────────┐    ┌─────────┐                     ┌─────────┐│
-│ PHASE 1 │───▶│ PHASE 2 │────────────────────▶│ PHASE 4 │┘
-│Baseline │    │Theories │                     │  Fix    │
-└─────────┘    └─────────┘                     └─────────┘
-                    │                                ▲
-                    │ (if Deeper Investigation       │
-                    │  = REQUIRED)                   │
-                    ▼                                │
-               ┌─────────┐                           │
-               │ PHASE 3 │───────────────────────────┘
-               │ Verify  │
-               └─────────┘
-                    ▲                                │
-                    │         (if gaps remain)       │
-                    └────────────────────────────────┘
-                                   │
-                                   ▼ (if done)
-                              ┌─────────┐
-                              │  DONE   │
-                              └─────────┘
+```mermaid
+flowchart TD
+    Start([Start]) --> P1[PHASE 1<br/>Baseline]
+    P1 --> P2[PHASE 2<br/>Theories]
 
-Phase 2 → Phase 4 directly if "Deeper Investigation: SKIP"
-Phase 2 → Phase 3 → Phase 4 if "Deeper Investigation: REQUIRED"
+    P2 -->|Deeper Investigation:<br/>SKIP| P4[PHASE 4<br/>Fix]
+    P2 -->|Deeper Investigation:<br/>REQUIRED| P3[PHASE 3<br/>Verify]
+
+    P3 --> P4
+
+    P4 -->|Gaps remain| P3
+    P4 -->|Done| End([Complete])
 ```
+
+**Key paths:**
+- Phase 2 → Phase 4 directly if "Deeper Investigation: SKIP" (definitive evidence + low-risk fix)
+- Phase 2 → Phase 3 → Phase 4 if "Deeper Investigation: REQUIRED" (circumstantial evidence OR high-risk fix)
 
 ## Orchestrator Checklist
 
@@ -134,4 +123,3 @@ This skill CALLS the phase skills:
 - `implementing-performance-fixes` (PHASE 4)
 
 This skill does NOT call tool skills directly. Tool skills are called by PHASE 3.
-

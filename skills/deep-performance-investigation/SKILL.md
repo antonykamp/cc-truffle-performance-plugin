@@ -41,6 +41,8 @@ See [WORKFLOW.md](WORKFLOW.md) for detailed procedures.
 
 ## Tool Skills
 
+Use the following tool skills for targeted profiling:
+
 | Purpose | Tool Skill |
 |---------|-----------|
 | Hot function identification | `profiling-with-cpu-sampler` |
@@ -56,8 +58,6 @@ See [WORKFLOW.md](WORKFLOW.md) for detailed procedures.
 
 ## Common Pitfalls
 
-- ❌ **Running this phase for theories marked "Deeper Investigation: SKIP"** - Waste of time, implement directly
-- ❌ **Using broad profiling again** - Phase 2 already did that. Use TARGETED profiling with filters
 - ❌ **Running only one tool** - Multiple tools required for confidence
 - ❌ **Skipping Fermi verification** - Silent tool failures produce garbage data
 - ❌ **Ignoring emergent issues** - If tools reveal a critical issue (like deopt loops), evaluate whether to pivot

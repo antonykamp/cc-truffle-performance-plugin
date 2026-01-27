@@ -25,34 +25,25 @@ Implements performance fixes and validates them with benchmarks. Handles both th
   - `Status: pending` + `Deeper Investigation: SKIP`, OR
   - `Status: verified`
 
-**Step 2**: Design fix approach (see [WORKFLOW.md](WORKFLOW.md) Phase 2)
+**Step 2**: Design performance fix approach and implement the fix (Most important step)
+- Architectural changes allowed if cost-benefit fits
+- Keep fix focused on the specific theory to minimize risk
 
-**Step 3**: Implement the fix
+**Step 3**: Run all benchmarks to validate effectiveness of the fix
 
-**Step 4**: Run 3 relevant benchmarks to validate
-
-**Step 5**: Based on results:
-- **Improved** → Keep fix, run ALL benchmarks, update BENCHMARK_BASELINE.md + theory status
+**Step 4**: Based on results:
+- **Improved** → Keep fix, update BENCHMARK_BASELINE.md + theory status
 - **Degraded/No change** → Revert fix, update theory status, optionally run additional profiling to diagnose why
 
 ## Workflow Overview
 
 ```text
 1. Load verified theory with evidence
-2. Design fix (architectural changes allowed if cost-benefit fits)
-3. Implement fix
-4. Run 3 relevant benchmarks
-5a. If improved → run all benchmarks → update BENCHMARK_BASELINE → mark theory "fixed"
-5b. If degraded → revert → mark theory "fix-failed"
+2. Design fix (architectural changes allowed if cost-benefit fits) and implement fix.
+3. Run all benchmarks to validate effectiveness of the fix
+4a. If improved → update BENCHMARK_BASELINE → mark theory "fixed"
+4b. If degraded → revert → mark theory "fix-failed"
 ```
-
-## Benchmark Selection
-
-Select 3 benchmarks from BENCHMARK_BASELINE.md based on their documented focus:
-
-1. Read each benchmark's **Rationale** field
-2. Match rationale to the code path affected by your fix
-3. Prioritize benchmarks that exercise the fixed code
 
 ## File Updates
 
@@ -110,7 +101,7 @@ Or if fix failed:
 
 **Predecessor**: `deep-performance-investigation` → Provides verified theories
 
-**Successor**: Loop back to `broad-performance-investigation` if more issues exist
+**Successor**: Loop back to `deep-performance-investigation` if more issues exist
 
 ## Workflow Position
 
@@ -119,7 +110,7 @@ Or if fix failed:
 2. [broad-performance-investigation] → Generate theories (PHASE 2)
 3. [deep-performance-investigation]  → Verify with tools (PHASE 3)
 4. [implementing-performance-fixes]  → THIS SKILL (PHASE 4)
-5. Loop to step 2 if performance gaps remain
+5. Loop to step 3 if performance gaps remain
 ```
 
 See [WORKFLOW.md](WORKFLOW.md) for detailed phase instructions.

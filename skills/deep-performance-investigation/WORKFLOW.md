@@ -51,16 +51,18 @@ Run the tools specified in the theory's verification plan with TARGETED FOCUS on
 
 For each tool:
 
-1. **Configure for targeted profiling**
+1. **Call skill** - Call the relevant profiling skill
+
+2. **Smoke test** (if first time using this tool) - Run on trivial input to verify tool works
+
+3. **Configure for targeted profiling**
    - Use filters to focus on specific function/location from theory
    - Examples: `--vm.Djdk.graal.MethodFilter='*functionName*'`, `--engine.CompileOnly=functionName`
    - See tool skill documentation for proper filter syntax
 
-2. **Smoke test** (if first time using this tool) - Run on trivial input to verify tool works
+4. **Execute** on the actual benchmark with targeted configuration
 
-3. **Execute** on the actual benchmark with targeted configuration
-
-4. **Validate output** - Does magnitude match expectations?
+5. **Validate output** - Does magnitude match expectations?
    - Within ~1 order of magnitude → proceed with analysis
    - Wildly different or unexpected zero → diagnose before trusting
 
@@ -69,20 +71,23 @@ Save outputs to `tool-outputs/` for later reference.
 ### Handling Unexpected Results
 
 If tool output doesn't match expectations:
+
 - Check tool configuration and command syntax
 - Verify benchmark is running correctly
 - Consider whether your expectation was wrong (update mental model)
+- If unclear, skip to the next tool. The tool might not work for this theory.
 
 ## Phase 4: Handle Emergent Issues
 
-**Objective**: Respond appropriately when tools reveal unexpected problems
+**Objective**: Respond appropriately when tools reveal unexpected performance problems
 
 While running tools, you may discover issues not in your theory list (e.g., a deoptimization loop, compilation failure, unexpected allocation pattern).
 
 ### When This Happens
 
 1. **Assess the new issue's severity** - Is it Critical, High, Medium, or Low?
-2. **Compare to current theory** - Which has greater performance impact?
+2. **Add to theory list** - Document the new issue as a theory with appropriate details
+3. **Compare to current theory** - Which has greater performance impact?
 
 ### Decision
 
@@ -99,6 +104,7 @@ Use your judgment. The goal is to fix the most impactful issues first.
 ### Evaluate Tool Results
 
 Consider all evidence collected:
+
 - Do multiple tools agree?
 - Is there quantitative data (frequencies, percentages, counts)?
 - Does the evidence support or contradict the theory?
@@ -110,6 +116,7 @@ Consider all evidence collected:
 - **INCONCLUSIVE** - Insufficient or conflicting data
 
 For verified theories, characterize:
+
 - Root cause (from tool evidence)
 - Quantified impact (frequency, time%, allocations)
 - Affected code locations
@@ -139,18 +146,6 @@ For verified theories, characterize:
 3. Original theory may be revisited later
 
 ## Guidelines for Judgment Calls
-
-### When to Pivot vs Continue
-
-Pivot if the emergent issue:
-- Is causing deoptimization loops in hot paths
-- Is blocking compilation of core functions
-- Would make current theory's impact negligible by comparison
-
-Continue if the emergent issue:
-- Affects cold paths only
-- Is a minor optimization opportunity
-- Can wait until after the current fix
 
 ### When to Trust vs Question Tool Output
 
