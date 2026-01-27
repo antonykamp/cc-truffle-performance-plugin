@@ -327,7 +327,7 @@ Primary Comparisons:
    - **REQUIRED**: Run benchmark with appropriate iterations to measure performance
    - Use project's benchmark harness/framework for timing
    - Capture execution time (total runtime, average per iteration)
-   - Run multiple iterations for statistical reliability (e.g., 100-1000 iterations)
+   - Run 10 outer iterations for each benchmark, use the outer iteration specified in [EXAMPLES.md](EXAMPLES.md)!
    - Record timestamp of measurement
    - Example command: `<language-launcher> <harness> <benchmark> <iterations> <inner-iterations>`
    - Parse output to extract timing data

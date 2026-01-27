@@ -61,7 +61,15 @@ Generated: [Date]
 
 | Benchmark | Date | Iterations | Inner Iterations | Total Time | Average Time |
 |-----------|------|------------|------------------|------------|--------------|
-| queens | 2025-12-21 10:50 | 100 | 5000 | 3.2s | 32ms |
+| bounce | 2025-12-21 10:50 | 10 | 100 | 3.2s | 32ms |
+| list | 2025-12-21 10:50 | 10 | 100 | 3.2s | 32ms |
+| mandelbrot | 2025-12-21 10:50 | 10 | 100 | 3.2s | 32ms |
+| nbody | 2025-12-21 10:50 | 10 | 100 | 3.2s | 32ms |
+| permute | 2025-12-21 10:50 | 10 | 10000 | 3.2s | 32ms |
+| queens | 2025-12-21 10:50 | 10 | 3000 | 3.2s | 32ms |
+| sieve | 2025-12-21 10:50 | 10 | 10000 | 3.2s | 32ms |
+| storage | 2025-12-21 10:50 | 10 | 100 | 3.2s | 32ms |
+| towers | 2025-12-21 10:50 | 10 | 100 | 3.2s | 32ms |
 
 ## Reference Language Performance
 
