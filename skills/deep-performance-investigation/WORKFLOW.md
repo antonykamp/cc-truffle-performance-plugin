@@ -11,15 +11,17 @@ Systematic verification of performance theories using profiling tools.
 
 ## Phase 1: Select Theory to Verify
 
-**Objective**: Choose the highest-impact unverified theory
+**Objective**: Choose the highest-impact theory requiring deeper investigation
 
 ### Process
 
-1. Review the theory list from `generating-performance-theories`
-2. Select the highest-severity unverified theory
-3. Note the theory's verification plan (which tools are needed)
+1. Review the theory list from `PERFORMANCE_THEORIES.md`
+2. Filter for theories with `Deeper Investigation: REQUIRED` and `Status: pending`
+3. If no theories require deeper investigation, SKIP this skill and go to Phase 4
+4. Select the highest-severity theory from filtered list
+5. Note the theory's verification plan (which tools are needed)
 
-If one theory is verified, proceed to `implementing-performance-fixes` for the verified theory.
+**Critical**: Do NOT verify theories marked `Deeper Investigation: SKIP` - those go directly to implementation.
 
 ## Phase 2: Prepare for Verification
 
@@ -45,27 +47,24 @@ This prevents garbage-in-garbage-out from misconfigured tools.
 
 ### Process
 
-Run the tools specified in the theory's verification plan. For each tool:
+Run the tools specified in the theory's verification plan with TARGETED FOCUS on the specific theory.
 
-1. **Smoke test** (if first time using this tool) - Run on trivial input to verify tool works
-2. **Execute** on the actual benchmark
-3. **Validate output** - Does magnitude match expectations?
+For each tool:
+
+1. **Configure for targeted profiling**
+   - Use filters to focus on specific function/location from theory
+   - Examples: `--vm.Djdk.graal.MethodFilter='*functionName*'`, `--engine.CompileOnly=functionName`
+   - See tool skill documentation for proper filter syntax
+
+2. **Smoke test** (if first time using this tool) - Run on trivial input to verify tool works
+
+3. **Execute** on the actual benchmark with targeted configuration
+
+4. **Validate output** - Does magnitude match expectations?
    - Within ~1 order of magnitude → proceed with analysis
    - Wildly different or unexpected zero → diagnose before trusting
 
 Save outputs to `tool-outputs/` for later reference.
-
-### Direct Implementation as Verification (for small fixes)
-
-If the proposed fix is small (<10 lines of code), you can verify the theory empirically:
-
-1. Implement the fix
-2. Build the project
-3. Run the benchmark and compare against baseline
-4. Significant improvement → theory VERIFIED
-5. No improvement → theory FALSIFIED or requires further investigation
-
-This approach provides direct empirical evidence and is often faster than extensive profiling for simple changes.
 
 ### Handling Unexpected Results
 
@@ -173,7 +172,7 @@ Question when:
 
 ## Integration Notes
 
-**Inputs**: Theories from `generating-performance-theories` skill
+**Inputs**: Theories from `broad-performance-investigation` skill
 
 **Tool Skills**: Use as needed based on theory type:
 - `profiling-with-cpu-sampler` - where time is spent

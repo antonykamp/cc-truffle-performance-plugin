@@ -1,36 +1,39 @@
 ---
 name: implementing-performance-fixes
-description: "[PHASE 4] Implements and validates fixes for verified theories. Entry: PERFORMANCE_THEORIES.md has a verified theory. Outputs: Code fix, BENCHMARK_BASELINE.md new column, theory marked fixed/fix-failed. Next: Loop to PHASE 2 if performance gaps remain, otherwise done."
+description: "[PHASE 4] Implements and validates fixes. Entry: PERFORMANCE_THEORIES.md has theory with 'Deeper Investigation: SKIP' OR theory with status 'verified'. Outputs: Code fix, benchmarks run, BENCHMARK_BASELINE.md updated, theory marked fixed/falsified/fix-failed. Next: Loop to PHASE 2 if performance gaps remain."
 ---
 
 # Implementing Performance Fixes
 
-Transforms verified performance theories into working fixes with measured validation.
+Implements performance fixes and validates them with benchmarks. Handles both theories that skipped verification (definitive evidence) and theories that went through deep investigation.
 
 ## Core Principle
 
-**Verified theories identify the problem. This skill implements and validates the solution.**
+**Benchmarks are the ultimate validation. Profiling suggests, benchmarks prove.**
 
 ## Prerequisites
 
-- **REQUIRED**: `PERFORMANCE_THEORIES.md` with at least one theory status `verified`
+- **REQUIRED**: `PERFORMANCE_THEORIES.md` with theory having:
+  - `Status: pending` + `Deeper Investigation: SKIP`, OR
+  - `Status: verified` (from Phase 3)
 - **REQUIRED**: `BENCHMARK_BASELINE.md` with benchmark descriptions and execution commands
-- **REQUIRED**: Theory verification evidence from `verifying-performance-theories`
 
 ## Quick Start
 
-**Step 1**: Load the most critical verified theory from `PERFORMANCE_THEORIES.md`
+**Step 1**: Load theory to implement from `PERFORMANCE_THEORIES.md`
+- Select highest-priority theory with:
+  - `Status: pending` + `Deeper Investigation: SKIP`, OR
+  - `Status: verified`
 
 **Step 2**: Design fix approach (see [WORKFLOW.md](WORKFLOW.md) Phase 2)
 
 **Step 3**: Implement the fix
 
-**Step 4**: Run 3 relevant benchmarks to validate (select based on benchmark focus in BENCHMARK_BASELINE.md)
+**Step 4**: Run 3 relevant benchmarks to validate
 
 **Step 5**: Based on results:
-
-- **Improved** → Keep fix, run all benchmarks, update files
-- **Degraded** → Revert fix, update theory status
+- **Improved** → Keep fix, run ALL benchmarks, update BENCHMARK_BASELINE.md + theory status
+- **Degraded/No change** → Revert fix, update theory status, optionally run additional profiling to diagnose why
 
 ## Workflow Overview
 
@@ -85,23 +88,36 @@ Or if fix failed:
 
 | Status | Meaning |
 |--------|---------|
-| `verified` | Theory proven, awaiting fix |
-| `fixed` | Fix applied and validated |
-| `fix-failed` | Fix attempted but reverted |
-| `falsified` | Theory disproven during verification |
+| `pending` | Theory generated, awaiting implementation or verification |
+| `verified` | Theory proven by Phase 3 deep investigation |
+| `fixed` | Fix applied and benchmarks show improvement |
+| `falsified` | Theory disproven (either in Phase 3 or after implementation failed) |
+| `fix-failed` | Fix attempted but reverted due to regression/no improvement |
+
+## Entry Paths
+
+**Path 1: Skip Verification** (for definitive evidence + low-risk)
+- Theory has `Deeper Investigation: SKIP` and `Status: pending`
+- Implement directly based on Phase 2 evidence
+- If benchmarks fail → Mark `falsified` (theory was wrong despite apparent evidence)
+
+**Path 2: After Verification** (for theories requiring deep investigation)
+- Theory has `Status: verified` (from Phase 3)
+- Implement based on verified findings
+- If benchmarks fail → Mark `fix-failed` (theory was correct but fix approach was wrong)
 
 ## Integration
 
-**Predecessor**: `verifying-performance-theories` → Provides verified theories
+**Predecessor**: `deep-performance-investigation` → Provides verified theories
 
-**Successor**: Loop back to `generating-performance-theories` if more issues exist
+**Successor**: Loop back to `broad-performance-investigation` if more issues exist
 
 ## Workflow Position
 
 ```text
 1. [establishing-benchmark-baseline] → Create baseline (PHASE 1)
-2. [generating-performance-theories] → Generate theories (PHASE 2)
-3. [verifying-performance-theories]  → Verify with tools (PHASE 3)
+2. [broad-performance-investigation] → Generate theories (PHASE 2)
+3. [deep-performance-investigation]  → Verify with tools (PHASE 3)
 4. [implementing-performance-fixes]  → THIS SKILL (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```

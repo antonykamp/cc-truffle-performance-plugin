@@ -2,23 +2,30 @@
 
 Detailed procedures for implementing and validating performance fixes.
 
-## Phase 1: Load Verified Theory
+## Phase 1: Load Theory to Implement
 
 **Objective**: Understand the issue to fix
 
 ### Process
 
 1. **Read PERFORMANCE_THEORIES.md**
-   - Find theories with `Status: verified`
-   - Select the highest-severity verified theory
+   - Find theories ready for implementation:
+     - `Status: pending` + `Deeper Investigation: SKIP`, OR
+     - `Status: verified`
+   - Select the highest-severity theory from candidates
 
 2. **Extract theory details**
-   - Root cause from verification evidence
+   - Evidence from Phase 2 (or Phase 3 if verified)
    - Affected code locations (file:line)
-   - Quantified impact (frequency, time%, allocations)
-   - Tool evidence that proved the theory
+   - Fix complexity assessment
+   - Evidence that supports the theory
 
-3. **Read affected source files**
+3. **Understand evidence source**
+   - If `Deeper Investigation: SKIP` → Evidence from Phase 2 broad profiling
+   - If `Status: verified` → Evidence from Phase 3 targeted profiling
+   - Both are valid, just different investigation depths
+
+4. **Read affected source files**
    - Understand current implementation
    - Identify modification points
 
@@ -145,6 +152,7 @@ Detailed procedures for implementing and validating performance fixes.
 1. **Run ALL benchmarks**
    - Execute every benchmark in BENCHMARK_BASELINE.md
    - Collect all timing data
+   - Compare against baseline to measure impact across all benchmarks
 
 2. **Update BENCHMARK_BASELINE.md**
 
@@ -165,7 +173,7 @@ Detailed procedures for implementing and validating performance fixes.
    ```markdown
    ## Theory N: [Title]
 
-   **Status**: fixed  <!-- was: verified -->
+   **Status**: fixed  <!-- was: pending or verified -->
    **Fix Applied**: [Date]
    **Fix Description**: [What was changed]
    **Performance Impact**:
@@ -181,9 +189,9 @@ Detailed procedures for implementing and validating performance fixes.
 - BENCHMARK_BASELINE.md updated with new column
 - PERFORMANCE_THEORIES.md theory marked as `fixed`
 
-## Phase 5b: Fix Failed - Revert
+## Phase 5b: Fix Failed - Revert and Diagnose
 
-**Objective**: Revert changes, document failure
+**Objective**: Revert changes, document failure, optionally diagnose
 
 ### Process
 
@@ -192,29 +200,45 @@ Detailed procedures for implementing and validating performance fixes.
    git checkout -- .  # or git stash pop
    ```
 
-2. **Update PERFORMANCE_THEORIES.md**
+2. **Determine status based on entry path**
 
-   Find the theory and update:
+   **If theory came from Path 1** (`Deeper Investigation: SKIP`):
+   - Theory was based on Phase 2 evidence only
+   - Benchmarks proved the theory was WRONG
+   - Mark as `falsified`
+
+   **If theory came from Path 2** (`Status: verified`):
+   - Theory was proven by Phase 3 deep investigation
+   - Theory was correct, but fix approach failed
+   - Mark as `fix-failed`
+
+3. **Update PERFORMANCE_THEORIES.md**
 
    ```markdown
    ## Theory N: [Title]
 
-   **Status**: fix-failed  <!-- was: verified -->
+   **Status**: falsified  <!-- OR fix-failed, depending on path -->
    **Fix Attempted**: [Date]
    **Attempted Fix**: [What was tried]
-   **Reason for Failure**: [Why it didn't work]
+   **Benchmark Results**: [Actual performance impact]
    - bench1: +5% regression
    - bench2: no change
-   **Next Steps**: [Alternative approaches to consider]
+   **Analysis**: [Why theory was wrong OR why fix approach failed]
+   **Next Steps**: [If fix-failed: alternative approaches; if falsified: theory was incorrect]
    ```
 
-3. **Document learnings**
+4. **Optional: Run additional profiling to diagnose**
+   - If unclear WHY fix failed, run targeted profiling tools
+   - This provides insights for alternative approaches or reveals actual problem
+   - Save diagnostic output to `tool-outputs/`
+
+5. **Document learnings**
    - Why did the expected fix not work?
    - What does this reveal about the actual problem?
-   - Should the theory be re-evaluated?
+   - Should a new theory be generated?
 
 ### Output
 
 - Code reverted to pre-fix state
-- PERFORMANCE_THEORIES.md theory marked as `fix-failed`
-- Failure documented for future reference
+- PERFORMANCE_THEORIES.md theory marked as `falsified` or `fix-failed`
+- Failure documented with diagnostic insights

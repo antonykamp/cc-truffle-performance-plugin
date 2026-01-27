@@ -1,6 +1,6 @@
 ---
 name: establishing-benchmark-baseline
-description: "[PHASE 1] Creates benchmark suite and performance expectations. Entry: No BENCHMARK_BASELINE.md exists. Outputs: BENCHMARK_BASELINE.md, benchmark files. Next: PHASE 2 (generating-performance-theories)."
+description: "[PHASE 1] Creates benchmark suite and performance expectations. Entry: No BENCHMARK_BASELINE.md exists. Outputs: BENCHMARK_BASELINE.md, benchmark files. Next: PHASE 2 (broad-performance-investigation)."
 ---
 
 # Establishing Benchmark Baseline
@@ -11,7 +11,7 @@ Establishes performance baselines for your language implementation through autom
 
 ## Quick Start
 
-**Step 0**: Check if `BENCHMARK_BASELINE.md` already exists in the workspace. If it does, skip this workflow and continue with `generating-performance-theories`.
+**Step 0**: Check if `BENCHMARK_BASELINE.md` already exists in the workspace. If it does, skip this workflow and continue with `broad-performance-investigation`.
 
 **Step 1**: Ask user which benchmarks to generate using AskUserQuestion tool:
 - Benchmarks Game only
@@ -68,8 +68,8 @@ Baseline Progress:
 
 ```text
 1. [establishing-benchmark-baseline] → THIS SKILL (PHASE 1)
-2. [generating-performance-theories] → Generate theories (PHASE 2)
-3. [verifying-performance-theories]  → Verify with tools (PHASE 3)
+2. [broad-performance-investigation] → Generate theories (PHASE 2)
+3. [deep-performance-investigation]  → Verify with tools (PHASE 3)
 4. [implementing-performance-fixes]  → Implement and validate fix (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```

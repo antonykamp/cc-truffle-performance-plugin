@@ -1,9 +1,9 @@
 ---
-name: generating-performance-theories
-description: "[PHASE 2] Analyzes code to identify optimization opportunities. Entry: BENCHMARK_BASELINE.md exists AND (no PERFORMANCE_THEORIES.md OR all theories fixed). Outputs: PERFORMANCE_THEORIES.md. Next: PHASE 3 (verifying-performance-theories)."
+name: broad-performance-investigation
+description: "[PHASE 2] Broad profiling and code analysis to identify optimization opportunities. Entry: BENCHMARK_BASELINE.md exists AND (no PERFORMANCE_THEORIES.md OR all theories fixed). Outputs: PERFORMANCE_THEORIES.md with evidence quality assessment. Next: PHASE 3 (deep-performance-investigation) or PHASE 4 based on 'Deeper Investigation' decision."
 ---
 
-# Generating Performance Theories
+# Broad Performance Investigation
 
 Systematically analyzes language implementation code to generate testable performance hypotheses. Produces a prioritized list of theories ready for verification with profiling tools.
 
@@ -11,9 +11,10 @@ Systematically analyzes language implementation code to generate testable perfor
 
 1. **Loads benchmark data** - Reads BENCHMARK_BASELINE.md and timing results
 2. **Analyzes performance gaps** - Compares actual vs expected performance
-3. **Performs systematic code analysis** - Examines implementation for anti-patterns
-4. **Generates prioritized theories** - Each with verification plan and expected evidence
-5. **Outputs theory list** - Ready for `verifying-performance-theories` skill
+3. **Profiles with basic tools** - Runs cpusampler (hot functions/tiers), memorytracer (allocations), IGV overview (compiler optimization)
+4. **Performs systematic code analysis** - Examines implementation for anti-patterns
+5. **Generates prioritized theories** - Each with verification plan and expected evidence
+6. **Outputs theory list** - Ready for `deep-performance-investigation` skill
 
 ## Prerequisites
 
@@ -24,7 +25,7 @@ Systematically analyzes language implementation code to generate testable perfor
 ## Quick Start
 
 **Step 0**: Check if a theories file (e.g., `PERFORMANCE_THEORIES.md`) already exists in the workspace:
-- If it exists with **unverified theories**, skip this workflow and continue with `verifying-performance-theories`
+- If it exists with **unverified theories**, skip this workflow and continue with `deep-performance-investigation`
 - If it exists but **all theories are validated and fixed**, delete it and run this skill again to generate new theories for the next optimization iteration
 
 **Step 1**: Ask user for analysis focus using AskUserQuestion:
@@ -36,9 +37,14 @@ Systematically analyzes language implementation code to generate testable perfor
 
 **Step 2**: Load benchmark baseline and timing results
 
-**Step 3**: Execute systematic analysis following [WORKFLOW.md](WORKFLOW.md)
+**Step 3**: Run initial profiling to guide analysis:
+- `profiling-with-cpu-sampler` - Identify hot functions and tier distribution
+- `profiling-memory-allocations` - Detect allocation hotspots
+- `analyzing-compiler-graphs` - Get IGV overview of optimization patterns
 
-**Step 4**: Output theory list for verification
+**Step 4**: Execute systematic code analysis following [WORKFLOW.md](WORKFLOW.md), using profiling data to prioritize
+
+**Step 5**: Output theory list for verification
 
 ## Theory Structure
 
@@ -47,14 +53,32 @@ Each generated theory includes:
 ```
 Theory: [Description of the performance issue]
 Source: [Where discovered - code location, performance gap, pattern]
+Evidence Quality: [DEFINITIVE / CIRCUMSTANTIAL]
+Evidence: [Specific tool outputs from Phase 2 profiling]
+Fix Complexity: [LOW-RISK / HIGH-RISK]
+Deeper Investigation: [SKIP / REQUIRED]
 Category: [Implementation / Configuration / Architectural]
 Severity: [Critical / High / Medium / Low]
-Verification Tools:
+Verification Tools: [Only if Deeper Investigation = REQUIRED]
   - Tool 1: [skill name] → Purpose: [what to check]
   - Tool 2: [skill name] → Purpose: [what to check]
 Expected Evidence: [What tool output would confirm theory]
 Rationale: [Why this is expected to be an issue]
 ```
+
+**Evidence Quality Guidelines:**
+- **DEFINITIVE**: Specific tool output with line numbers, node types, or exact barriers
+  - Example: Performance warning "virtual call at CallNode.java:42"
+  - Example: IGV shows CommitAllocationNode in specific function
+  - Example: Deopt trace shows specific line causing transfers
+- **CIRCUMSTANTIAL**: General patterns or observations without specific tool confirmation
+  - Example: "Function X is 30% of time" (but WHY is unknown)
+  - Example: "Allocations detected" (but WHICH ones matter?)
+  - Example: Code pattern suggests issue (but no tool evidence)
+
+**Deeper Investigation Logic:**
+- **SKIP** if: DEFINITIVE evidence + LOW-RISK fix
+- **REQUIRED** if: CIRCUMSTANTIAL evidence OR HIGH-RISK fix
 
 ## Analysis Categories
 
@@ -91,6 +115,8 @@ Rationale: [Why this is expected to be an issue]
 - `analyzing-compiler-graphs` - Deep IR analysis
 
 ## Systematic Code Analysis
+
+**Use profiling data (cpusampler, memorytracer, IGV) to prioritize which code areas to analyze first.**
 
 ### Step 1: Language Definition & Bytecode Configuration
 ```
@@ -149,22 +175,49 @@ Benchmark: [Benchmark name]
 
 ## Theory 1: [Title]
 
+**Status**: pending
 **Source**: [code location or performance gap]
 **Category**: Implementation
 **Severity**: Critical
 
-**Verification Plan**:
-1. `detecting-performance-warnings` → Check for virtual call warnings at [location]
-2. `profiling-with-cpu-sampler` → Measure time in [function], expect >X% if theory true
+**Evidence Quality**: DEFINITIVE
+**Evidence**:
+- Performance warning: "virtual call at CallNode.java:42"
+- cpusampler: CallNode consumes 30% execution time
+- Tier distribution: 60% T0, 30% T1, 10% T2
 
-**Expected Evidence**: Virtual call warning at line X, or >30% time in interpreter tier
+**Fix Complexity**: LOW-RISK (add @Cached, 2 lines, single file)
+**Deeper Investigation**: SKIP (definitive evidence + low-risk fix)
 
-**Rationale**: [Why this is expected to cause issues]
+**Rationale**: Virtual call prevents inlining and specialization
 
 ---
 
 ## Theory 2: [Title]
-...
+
+**Status**: pending
+**Source**: [code location or performance gap]
+**Category**: Architectural
+**Severity**: High
+
+**Evidence Quality**: CIRCUMSTANTIAL
+**Evidence**:
+- cpusampler: ArithmeticNode consumes 25% execution time
+- Code review: No primitive specializations found
+- memtracer: No allocation data for this function
+
+**Fix Complexity**: HIGH-RISK (requires specialization architecture, 50+ lines, multiple files)
+**Deeper Investigation**: REQUIRED (circumstantial evidence + high-risk fix)
+
+**Verification Tools**:
+1. `detecting-performance-warnings` → Check for specific optimization barriers
+2. `analyzing-compiler-graphs` → Examine what compiler actually does
+
+**Expected Evidence**: Boxing nodes in IR, or type check warnings
+
+**Rationale**: Missing specializations likely causing boxing overhead
+
+---
 ```
 
 ## Integration with Other Skills
@@ -173,7 +226,7 @@ Benchmark: [Benchmark name]
 - `establishing-benchmark-baseline` → Provides BENCHMARK_BASELINE.md
 
 **Successor Skills**:
-- `verifying-performance-theories` → Verifies theories with profiling tools
+- `deep-performance-investigation` → Verifies theories with profiling tools
 - `implementing-performance-fixes` → Implements and validates fixes for verified theories
 
 **Tool Skills Referenced**:
@@ -190,8 +243,8 @@ Benchmark: [Benchmark name]
 
 ```text
 1. [establishing-benchmark-baseline] → Create baseline (PHASE 1)
-2. [generating-performance-theories] → THIS SKILL (PHASE 2)
-3. [verifying-performance-theories]  → Verify with tools (PHASE 3)
+2. [broad-performance-investigation] → THIS SKILL (PHASE 2)
+3. [deep-performance-investigation]  → Verify with tools (PHASE 3)
 4. [implementing-performance-fixes]  → Implement and validate fix (PHASE 4)
 5. Loop to step 2 if performance gaps remain
 ```

@@ -12,13 +12,13 @@ This plugin includes expert-level skills for:
 - **Establishing Benchmark Baselines** - Creating reliable performance benchmarks
 - **Fetching Truffle Documentation** - Accessing up-to-date Truffle API docs
 - **Generating Performance Reports** - Creating comprehensive analysis reports
-- **Generating Performance Theories** - Developing hypotheses for performance issues
+- **Broad Performance Investigation** - Profiling and analyzing to identify optimization opportunities
 - **Profiling Memory Allocations** - Tracking allocation patterns and memory usage
 - **Profiling with CPU Sampler** - Collecting and analyzing CPU profiles
 - **Tracing Compilation Events** - Monitoring JIT compilation activity
 - **Tracing Execution Counts** - Measuring node execution frequencies
 - **Tracing Inlining Decisions** - Understanding inlining behavior
-- **Verifying Performance Theories** - Validating performance hypotheses
+- **Deep Performance Investigation** - Targeted profiling to validate specific theories
 
 ## Installation
 
@@ -57,18 +57,19 @@ cc-truffle-performance-plugin/
 │   └── plugin.json         # Plugin manifest
 └── skills/                 # Agent Skills directory
     ├── analyzing-compiler-graphs/
+    ├── broad-performance-investigation/
+    ├── deep-performance-investigation/
     ├── detecting-deoptimizations/
     ├── detecting-performance-warnings/
     ├── establishing-benchmark-baseline/
     ├── fetching-truffle-documentation/
-    ├── generating-performance-theories/
     ├── implementing-performance-fixes/
+    ├── optimization-workflow-orchestrator/
     ├── profiling-memory-allocations/
     ├── profiling-with-cpu-sampler/
     ├── tracing-compilation-events/
     ├── tracing-execution-counts/
-    ├── tracing-inlining-decisions/
-    └── verifying-performance-theories/
+    └── tracing-inlining-decisions/
 ```
 
 ## Development

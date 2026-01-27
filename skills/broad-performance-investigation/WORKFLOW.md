@@ -64,7 +64,39 @@ Detailed procedures for systematic performance theory generation.
 - Performance gap analysis
 - List of problem benchmarks
 
-## Phase 2: Generate Performance Theories
+## Phase 2: Run Initial Profiling
+
+**Objective**: Gather profiling data to guide and prioritize code analysis
+
+### Process
+
+1. **Run CPU Sampler** (`profiling-with-cpu-sampler`)
+   - Execute with `--cpusampler --cpusampler.ShowTiers=true`
+   - Identify hot functions (>5% time)
+   - Check tier distribution (T0/T1/T2) for compilation issues
+   - Save output to `tool-outputs/cpu-sampler-[benchmark].txt`
+
+2. **Run Memory Tracer** (`profiling-memory-allocations`)
+   - Execute with `--memtracer`
+   - Identify allocation hotspots
+   - Note allocation-heavy functions
+   - Save output to `tool-outputs/memtracer-[benchmark].txt`
+
+3. **Get IGV Overview** (`analyzing-compiler-graphs`)
+   - Dump compiler graphs for 1-2 hot functions (from cpusampler)
+   - Use `--vm.Djdk.graal.Dump=Truffle:1 --vm.Djdk.graal.MethodFilter='*hotFunction*'`
+   - Quick scan for optimization patterns: indirect calls, allocations, boxing
+   - Save to `compiler_graphs/` directory
+
+### Output
+
+- Hot function list with time percentages
+- Tier distribution data (% in T0/T1/T2)
+- Allocation hotspots
+- High-level compiler optimization patterns
+- **Prioritized code areas to analyze**
+
+## Phase 3: Generate Performance Theories
 
 **Objective**: Generate testable performance theories based on gaps, patterns, and user's focus areas
 
@@ -93,6 +125,8 @@ For each benchmark significantly slower than baseline:
 - **All slow benchmarks** → Compilation effectiveness theories
 
 ### Step 3: Systematic Code Analysis (Most Important)
+
+**Use profiling data from Phase 2 to prioritize which code areas to analyze first (hot functions, allocation sites, non-compiling code).**
 
 **Filter analysis by user's focus:**
 
@@ -153,15 +187,51 @@ For each theory, list ALL tools needed for complete verification:
 | Allocation overhead | `profiling-memory-allocations` | `analyzing-compiler-graphs` |
 | Frequency analysis | `tracing-execution-counts` | `profiling-with-cpu-sampler` |
 
+### Step 7: Assess Evidence Quality and Make Deeper Investigation
+
+For EACH theory generated in Step 6, critically assess:
+
+**A. Evidence Quality Assessment**
+
+Review Phase 2 profiling outputs:
+- Do we have specific line numbers or node types? → DEFINITIVE
+- Do we only have aggregate metrics (% time, general patterns)? → CIRCUMSTANTIAL
+- Did performance warnings fire for this location? → DEFINITIVE
+- Did IGV show specific optimization failures? → DEFINITIVE
+- Is this based on code patterns without tool confirmation? → CIRCUMSTANTIAL
+
+**B. Fix Complexity Assessment**
+
+Estimate the fix:
+- Lines of code: <10 lines → candidate for LOW-RISK
+- Files touched: Single file → candidate for LOW-RISK
+- Architectural impact: Localized change → LOW-RISK, refactoring core patterns → HIGH-RISK
+- Implementation time: <15 min → LOW-RISK, >30 min → HIGH-RISK
+- Revert cost: Easy to undo → LOW-RISK, affects many components → HIGH-RISK
+
+**C. Make Deeper Investigation**
+
+Apply decision logic:
+- **DEFINITIVE evidence + LOW-RISK fix** → Deeper Investigation: SKIP
+- **CIRCUMSTANTIAL evidence OR HIGH-RISK fix** → Deeper Investigation: REQUIRED
+- **Uncertain (50/50)** → Use AskUserQuestion to consult user
+
+**Critical Analysis Required**: This decision determines whether to implement directly or investigate further. Be rigorous in assessing evidence quality - don't skip verification based on wishful thinking.
+
 ### Output
 
 Prioritized list of all theories found (comprehensive analysis within user's focus areas):
 
 For EACH theory:
+- Status: pending
 - Specific code location (file:line)
 - Code excerpt showing the issue
 - Category: Implementation/Configuration/Architectural
-- ALL tool skills needed for 100% verification
-- Expected evidence from each tool
+- Evidence Quality: DEFINITIVE or CIRCUMSTANTIAL
+- Evidence: Specific tool outputs from Phase 2
+- Fix Complexity: LOW-RISK or HIGH-RISK
+- Deeper Investigation: SKIP or REQUIRED
+- Verification tools (only if Deeper Investigation = REQUIRED)
+- Expected evidence from each tool (only if Deeper Investigation = REQUIRED)
 - Theory rationale and root cause
 - Impact estimate (Critical/High/Medium/Low)
