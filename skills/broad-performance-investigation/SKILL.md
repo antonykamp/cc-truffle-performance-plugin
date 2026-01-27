@@ -39,12 +39,12 @@ Systematically analyzes language implementation code to generate testable perfor
 
 **Step 2**: Load benchmark baseline and timing results
 
-**Step 3**: Execute systematic code analysis to identify potential performance issues based on established anti-patterns (most important step).
+**Step 3**: Execute thorough systematic code analysis to identify potential performance (most important step!).
 
-- Analyze the full language implementation codebase:
-  - Start with RootNodes implementation of AST
-  - Continue with Language implementation file
-  - Analyze data structures and utility classes used in execution
+- Analyze the *full* language implementation codebase *extremely thoroughly*:
+  1. Start with RootNodes implementation of AST
+  2. Continue with Language implementation file
+  3. Analyze data structures and utility classes used in execution
 
 **Step 4**: Run profiling to gather data for additional theories:
 
