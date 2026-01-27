@@ -328,7 +328,7 @@ Primary Comparisons:
    - Use project's benchmark harness/framework for timing
    - Capture execution time (total runtime, average per iteration)
    - Run 10 outer iterations for each benchmark
-   - **Important** Run inner iterations as specified by AreWeFastYet guidelines:
+   - **IMPORTANT** Run inner iterations as specified by AreWeFastYet guidelines:
        - bounce: 100
        - list: 100
        - mandelbrot: 100
@@ -360,6 +360,7 @@ Primary Comparisons:
 - Designed specifically for language implementation performance analysis
 - More relevant for profiling than Benchmarks Game
 - Should implement ALL of them (usually 7-10 benchmarks)
+- Ensure that you use the correct outer and inner iteration counts as specified
 
 ## Phase 7: Generate and Save Baseline Report
 

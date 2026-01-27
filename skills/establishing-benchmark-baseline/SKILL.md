@@ -31,7 +31,7 @@ Baseline Progress:
 - [ ] Phase 7: Generate and save baseline report with performance data
 ```
 
-**Step 3**: Execute workflow following phase instructions in [WORKFLOW.md](WORKFLOW.md).
+**Step 3**: Execute workflow following phase instructions in [WORKFLOW.md](WORKFLOW.md). This is required to ensure all steps are completed correctly.
 
 ## What This Skill Does
 
