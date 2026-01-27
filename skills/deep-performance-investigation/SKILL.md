@@ -30,7 +30,7 @@ Deep investigation of specific performance theories using targeted profiling too
 
 ## Workflow Overview
 
-1. **Select** highest-priority unverified theory
+1. **Select** highest-severity unverified theory (Critical > High > Medium > Low)
 2. **Prepare** - load tool docs, form expectations (Fermi estimation)
 3. **Execute** verification - use profiling tools OR direct implementation (if fix is <10 lines)
 4. **Handle emergent issues** - pivot if more critical, note as future work if not

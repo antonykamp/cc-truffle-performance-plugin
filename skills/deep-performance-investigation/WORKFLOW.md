@@ -11,14 +11,14 @@ Systematic verification of performance theories using profiling tools.
 
 ## Phase 1: Select Theory to Verify
 
-**Objective**: Choose the highest-impact theory requiring deeper investigation
+**Objective**: Choose the highest-severity theory requiring deeper investigation
 
 ### Process
 
 1. Review the theory list from `PERFORMANCE_THEORIES.md`
 2. Filter for theories with `Deeper Investigation: REQUIRED` and `Status: pending`
 3. If no theories require deeper investigation, SKIP this skill and go to Phase 4
-4. Select the highest-severity theory from filtered list
+4. Select the highest-severity theory from filtered list (Critical > High > Medium > Low)
 5. Note the theory's verification plan (which tools are needed)
 
 **Critical**: Do NOT verify theories marked `Deeper Investigation: SKIP` - those go directly to implementation.
@@ -132,7 +132,7 @@ For verified theories, characterize:
 ### If FALSIFIED
 
 1. Document why the theory was wrong (learning for future)
-2. Proceed immediately to next highest-priority theory
+2. Proceed immediately to next highest-severity theory
 
 ### If INCONCLUSIVE
 

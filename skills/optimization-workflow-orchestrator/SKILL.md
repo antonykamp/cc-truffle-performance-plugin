@@ -29,21 +29,26 @@ Check files in this order to determine current phase:
    YES → Continue to check 3
 
 3. Any theory with status "verified"?
-   YES → Execute PHASE 4 (implementing-performance-fixes) for verified theory
+   YES → Execute PHASE 4 (implementing-performance-fixes) for highest severity verified theory
    NO  → Continue to check 4
 
-4. Any theory with status "pending" + "Deeper Investigation: SKIP"?
-   YES → Execute PHASE 4 (implementing-performance-fixes) for this theory
+4. Any theory with status "pending"?
+   YES → Select highest severity pending theory:
+         - If "Deeper Investigation: SKIP" → Execute PHASE 4 (implementing-performance-fixes)
+         - If "Deeper Investigation: REQUIRED" → Execute PHASE 3 (deep-performance-investigation)
    NO  → Continue to check 5
 
-5. Any theory with status "pending" + "Deeper Investigation: REQUIRED"?
-   YES → Execute PHASE 3 (deep-performance-investigation) for this theory
-   NO  → Continue to check 6
-
-6. All theories have status "fixed" or "fix-failed" or "falsified"?
+5. All theories have status "fixed" or "fix-failed" or "falsified"?
    YES → Evaluate termination (see below)
    NO  → Error state, ask user
 ```
+
+**Priority Order for Theory Selection:**
+
+1. Prioritize by **Severity**: Critical > High > Medium > Low
+2. If multiple theories share the same severity, select the first one
+3. Respect "Deeper Investigation" decision (SKIP→Phase 4, REQUIRED→Phase 3)
+4. This ensures critical performance issues are addressed before easy fixes
 
 ## Phase Skills
 

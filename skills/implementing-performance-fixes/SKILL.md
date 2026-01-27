@@ -21,7 +21,7 @@ Implements performance fixes and validates them with benchmarks. Handles both th
 ## Quick Start
 
 **Step 1**: Load theory to implement from `PERFORMANCE_THEORIES.md`
-- Select highest-priority theory with:
+- Select highest-severity theory (Critical > High > Medium > Low) with:
   - `Status: pending` + `Deeper Investigation: SKIP`, OR
   - `Status: verified`
 
