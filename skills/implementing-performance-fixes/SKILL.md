@@ -30,6 +30,7 @@ Implements performance fixes and validates them with benchmarks. Handles both th
 - Keep fix focused on the specific theory to minimize risk
 
 **Step 3**: Run all benchmarks to validate effectiveness of the fix
+- Use the same number of iterations as in `BENCHMARK_BASELINE.md`
 
 **Step 4**: Based on results:
 - **Improved** → Keep fix, update BENCHMARK_BASELINE.md + theory status

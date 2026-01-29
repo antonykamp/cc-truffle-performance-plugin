@@ -327,7 +327,7 @@ Primary Comparisons:
    - **REQUIRED**: Run benchmark with appropriate iterations to measure performance
    - Use project's benchmark harness/framework for timing
    - Capture execution time (total runtime, average per iteration)
-   - Run 10 outer iterations for each benchmark
+   - Run 20 outer iterations for each benchmark
    - **IMPORTANT** Run inner iterations as specified by AreWeFastYet guidelines:
        - bounce: 100
        - list: 100
