@@ -80,7 +80,7 @@ Optimization: [Specific optimizations available]
 
 4. **Validate availability**
    - Check if languages exist on Benchmarks Game
-   - Verify sufficient benchmark coverage (at least 5-10 benchmarks)
+   - Verify sufficient benchmark coverage (at least 7-10 benchmarks)
    - Ensure recent measurements available (not outdated)
 
 5. **Select 1-2 comparable languages**
@@ -327,7 +327,7 @@ Primary Comparisons:
    - **REQUIRED**: Run benchmark with appropriate iterations to measure performance
    - Use project's benchmark harness/framework for timing
    - Capture execution time (total runtime, average per iteration)
-   - Run 20 outer iterations for each benchmark
+   - **IMPORTANT** Run 20 outer iterations for each benchmark
    - **IMPORTANT** Run inner iterations as specified by AreWeFastYet guidelines:
        - bounce: 100
        - list: 100

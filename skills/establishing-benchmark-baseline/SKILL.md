@@ -80,6 +80,7 @@ Baseline Progress:
 - **Choosing inappropriate benchmarks** - Select benchmarks relevant to your language's strengths
 - **Not verifying correctness** - Ensure benchmark outputs are correct to avoid misleading results
 - **Small sample size** - Use sufficient iterations for reliable timing data (e.g., N=500 or more)
+- **Small outer iterations** - Ensure outer iterations are large enough to minimize noise. Use 20 iterations.
 
 ## Detailed Documentation
 
